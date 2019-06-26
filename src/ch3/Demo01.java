@@ -16,13 +16,72 @@ public class Demo01 {
         a2.next = a3;
         a3.next = a4;
         a4.next = a5;
-        ListNode node = new Solution().reverseList(a1);
-        //ListNode node = a1;
+        // ListNode node = new Solution().reverseList(a1);
+        ListNode node = Demo01.textReverseList(a1);
+
         while (node != null){
             System.out.print(node.val);
             node = node.next;
             System.out.print(node != null ? "->" : "");
         }
+    }
+
+    /**
+     * 三个指针
+     * */
+    public static ListNode reverseList(ListNode head){
+        if(head == null) {
+            return null;
+        }
+        // 当前节点a
+        ListNode a = head;
+        // 下个节点b
+        ListNode b = head.next;
+        // 下下个节点c
+        ListNode temp;
+
+        // 头结点的指针先清空
+        head.next = null;
+
+        // 有可能链表只有一个节点，所以需要看b是否为null
+        while(b != null){
+            // 记录C节点
+            temp = b.next;
+            // a->b 反向
+            b.next = a;
+
+            if(temp == null){
+                break;
+            }
+            // 移动到下一个节点
+            a = b;
+            b = temp;
+        }
+        return b == null ? a : b;
+    }
+
+    public static ListNode textReverseList(ListNode head){
+
+        // 当前节点
+        ListNode a =head;
+        // 下一个节点
+        ListNode b = head.next;
+        // 下下个节点
+        ListNode temp;
+
+        // 头结点的指针先清空
+        head.next = null;
+
+        while(b !=null){
+            temp = b.next;
+
+            b.next = a;
+
+            a = b;
+
+            b = temp;
+        }
+        return b == null ? a : b;
     }
 }
 
@@ -38,20 +97,17 @@ public class Demo01 {
  class Solution {
     public ListNode reverseList(ListNode head) {
 
-        // 下一结点
-        ListNode prev =null;
-        // 新建头结点
+        ListNode prev = null;
         ListNode curr = null;
+
         while (head != null){
+
             curr = new ListNode(head.val);
-            // 下一个结点为 null
             curr.next = prev;
-            // 当前的结点为新建结点的前一个结点
             prev = curr;
             head = head.next;
         }
         return prev;
-
     }
 
      public  ListNode reverseList2(ListNode head){
