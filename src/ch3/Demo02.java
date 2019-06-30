@@ -2,7 +2,7 @@ package ch3;
 
 /**
  * 单链表两两反转
- * <p>
+ * 时间复制度O（n）  空间复杂度 o(n)
  * 已知一个链表：a->b->c->d->e
  * 每两个元素进行反转：b->a->d->c->e
  */
@@ -70,24 +70,20 @@ public class Demo02 {
         ListNode previous = null;
         ListNode newHead = b == null ? a : b;
 
-        while (b != null){
+        while(b != null){
             temp = b.next;
             b.next = a;
-            a.next =temp;
-            if ( previous !=null){
+            a.next = temp;
+            if(previous != null){
                 previous.next = b;
-
             }
-            if (temp ==null){
+            if (temp == null){
                 break;
             }
-
             previous = a;
             a = temp;
             b = temp.next;
-
         }
         return newHead;
-
     }
 }
